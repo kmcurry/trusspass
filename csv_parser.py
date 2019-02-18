@@ -28,6 +28,7 @@ import pytz
 import csv
 import sys
 import re
+import time
 
 def convert_to_iso8601(timestamp_str):
     """ This function converts a given timestamp to ISO-8601 format an TZ to US/Eastern"""
@@ -70,11 +71,12 @@ def normalize_notes(note):
     return note 
 
 if __name__ == "__main__":
+    start = time.time()
     """ Open the input file as text, expecting utf-8, and use the Python error default replacement handler"""
     inputFile = open(sys.argv[1], 'rt', encoding="utf-8", errors="replace")
-    #outputFile = open("sample-fixed.csv", "w+")
+    outputFile = open("sample-fixed.csv", "w+")
     reader = csv.reader(inputFile)
-    writer = csv.writer(sys.stdout)
+    writer = csv.writer(outputFile)
     writer.writerow(["Timestamp","Address","ZIP","FullName","FooDuration","BarDuration","TotalDuration","Notes"])
     next(reader) # Skip header / first row
     for row in reader:
@@ -91,4 +93,6 @@ if __name__ == "__main__":
         except:
             """ Drop row on error """
             pass
-    #outputFile.close()
+    outputFile.close()
+    end = time.time()
+    print("Total running time: " + str(end - start))
