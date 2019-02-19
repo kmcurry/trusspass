@@ -14,14 +14,18 @@ class MyFirstTests(unittest.TestCase):
         except:
             pass
 
-    def test_should_normalize_zipcode(self):
-        normalize_zipcode("0102")
+    def test_should_normalize_addr(self):
+        normalize_addr("23 Gangnam, Style Lives Here, Gangnam Town, USA")
+
+    def test_should_normalize_duration(self):
+        normalize_duration("1:23:32.123")
+
 
     def test_should_normalize_name(self):
         normalize_name("kevin curry")
     
-    def test_should_normalize_addr(self):
-        normalize_addr("23 Gangnam, Style Lives Here, Gangnam Town, USA")
+    def test_should_normalize_zipcode(self):
+        normalize_zipcode("0102")
 
 
 if __name__ == '__main__':
