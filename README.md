@@ -1,6 +1,6 @@
 # README
 
-![alt text](tests/coverage.svg "Code Coverage")
+[![Code Coverage](tests/coverage.svg)](https://pypi.org/project/coverage-badge/)
 
 ## This is a submission for a software engineering position at Truss.Works using Python 3
 
