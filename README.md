@@ -1,5 +1,7 @@
 # README
 
+![alt text](tests/coverage.svg "Code Coverage")
+
 ## This is a submission for a software engineering position at Truss.Works using Python 3
 
 ### This submission was forked from @madhujoshi with the following changes:
