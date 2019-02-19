@@ -4,12 +4,15 @@
 # Description: A python script to parse a CSV file and normalize it using the specs in README.md
 # Author: Madhu Joshi (madhu.joshi@gmail.com)
 # Updates: Kevin Curry (kmcurry@gmail.com)
-#   * Update to Python3
-#   * Change file open to a text reader expecting utf-8 and use default replacement error handler
-#   * Change total duration to float format for consistency with other duration fields (reuse normalize_duration)
-#   * Write output to file
-#   * Include column names in output
-#   * Use clearer variable names
+#   
+#   * Updates to Python3
+#   * Changes file open to a text reader expecting utf-8 and uses default replacement error handler
+#   * Changes total duration to float format for consistency with other duration fields (reuses normalize_duration)
+#   * Includes column names in output
+#   * Drops row on date error
+#   * Adds sample CSV with date error
+#   * Adds tests
+#   * Writes output to file
 #
 # Date: 02/18/18
 # Requirements / Tested on:
