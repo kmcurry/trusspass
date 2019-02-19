@@ -11,7 +11,7 @@
 * Drops row on date error
 * Adds sample CSV with date error
 * Adds tests
-* (Writes output to file)(optional, commented out)
+* Writes output to file
 
 (Changes have been submitted as a Pull Request)
 
