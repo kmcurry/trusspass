@@ -71,33 +71,36 @@ def normalize_notes(note):
     """ return the notes field w/ no modification except unicode replacement """
     return note 
 
+def normalize_csv(arg1):
+    """ Open the input file as text, expecting utf-8, and use the Python error default replacement handler"""
+    inputFile = open(arg1, 'rt', encoding="utf-8", errors="replace")
+    outputFile = open("sample-fixed.csv", "w+")
+    reader = csv.reader(inputFile)
+    writer = csv.writer(outputFile)
+    writer.writerow(["Timestamp","Address","ZIP","FullName","FooDuration","BarDuration","TotalDuration","Notes"])
+    next(reader) # Skip header / first row
+    for row in reader:
+        try:
+            nd = convert_to_iso8601(row[0])
+            na = normalize_addr(row[1])
+            nz = normalize_zipcode(row[2])
+            nn = normalize_name(row[3])
+            d1 = normalize_duration(row[4])
+            d2 = normalize_duration(row[5])
+            td = total_duration(row[4], row[5])
+            note = normalize_notes(row[7])
+            writer.writerow([nd, na, nz, nn, d1, d2, td, note])
+        except:
+            """ Drop row on error """
+            pass
+    outputFile.close()
+
 if __name__ == "__main__":
     start = time.time()
     arg1 = sys.argv[1]
     if os.path.exists(arg1):
         print("Starting the parser with: " + arg1)
-        """ Open the input file as text, expecting utf-8, and use the Python error default replacement handler"""
-        inputFile = open(arg1, 'rt', encoding="utf-8", errors="replace")
-        outputFile = open("sample-fixed.csv", "w+")
-        reader = csv.reader(inputFile)
-        writer = csv.writer(outputFile)
-        writer.writerow(["Timestamp","Address","ZIP","FullName","FooDuration","BarDuration","TotalDuration","Notes"])
-        next(reader) # Skip header / first row
-        for row in reader:
-            try:
-                nd = convert_to_iso8601(row[0])
-                na = normalize_addr(row[1])
-                nz = normalize_zipcode(row[2])
-                nn = normalize_name(row[3])
-                d1 = normalize_duration(row[4])
-                d2 = normalize_duration(row[5])
-                td = total_duration(row[4], row[5])
-                note = normalize_notes(row[7])
-                writer.writerow([nd, na, nz, nn, d1, d2, td, note])
-            except:
-                """ Drop row on error """
-                pass
-        outputFile.close()
+        normalize_csv(arg1)
     else:
         print("No such file: " + arg1)
     end = time.time()
